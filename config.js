@@ -1,0 +1,1 @@
+window.backend_url = "https://lit-api.wimsp.nl/v1"

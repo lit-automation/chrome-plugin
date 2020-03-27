@@ -1,0 +1,19 @@
+#messageContainer{
+    z-index: 9999;
+    text-align: center;
+    padding-top: 13px;
+    color: white;
+    background-color: red;
+    position: absolute!important;
+    width: 100vw;
+    height: 50px;
+    transform: translate(0px, -300px);
+    transition: transform 0.75s;
+    text-align: center;
+}
+
+.testmessageShow{
+    display: block;
+    transform: translate(0px, 0px)!important;
+    transition: transform 0.75s;
+}

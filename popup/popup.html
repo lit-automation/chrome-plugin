@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/popup.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+
+    <title>Literature scraper - Chrome plugin</title>
+</head>
+
+<body>
+    <div id="messageDisplay"></div>
+    <div class="wrapper">
+        <div id="signinContainer" class="container">
+            <div class="row justify-content-center">
+                <h5>Signin with your email and password</h5>
+            </div>
+            <div class="row justify-content-center">
+                <div>
+                    <div class="row">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="row">
+                        <input id="email" type="text" name="email" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div>
+                    <div class="row">
+                        <label for="pass">Password:</label>
+                    </div>
+                    <div class="row">
+                        <input type="password" id="pass" name="password" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div id="errMsg" class="err-text"></div>
+            </div>
+
+            <div class="row justify-content-center">
+                <a id="noAccount" href="http://TODO" target="_blank">No account? Click here.</a>
+                <div class="button" id="signIn">Signin</div>
+            </div>
+
+        </div>
+        <div id="normal">
+            <div class="menu container">
+                <div id="home" class="row justify-content-center menu-item">
+                    <img src="images/home.svg" />
+                </div>
+                <div id="projects" class="row justify-content-center menu-item">
+                    <img src="images/archive.svg" />
+                </div>
+                <div id="settings" class="row justify-content-center menu-item">
+                    <img src="images/settings.svg" />
+                </div>
+                <div id="newproject" class="row justify-content-center menu-item">
+                    <img src="images/plus-circle.svg" />
+                </div>
+                <div id="signOut" class="row justify-content-center menu-item">
+                    <img src="images/log-out.svg" />
+                </div>
+            </div>
+            <div class="content-container">
+                <!-- Home page -->
+                <div id="home-page" class="container">
+                    <div class="row center">
+                        <h3>Web scraper</h3>
+                    </div>
+                    <div class="row label">
+                        Selected project
+                    </div>
+                    <div class="row">
+                        <div class="property">Name: </div>
+                        <div class="value cur-project-name"></div>
+                    </div>
+                    <div class="row">
+                        <div class="property">Status: </div>
+                        <div class="value cur-project-status"></div>
+                    </div>
+                    <div class="row">
+                        <div class="property">Article count: </div>
+                        <div class="value cur-project-article-count"></div>
+                    </div>
+                    <div id="scrape-manager">
+                        <div class="row">
+                            Start and pause gathering articles with the buttons below. Note that some of the databases visited require explicit access.
+                            Make sure you have access for all of them.
+                        </div>
+                        <div class="margintop row">
+                            <div class="col text-center">
+                                <div id="play" class="button">
+                                    <img class="scrapeicon" src="images/play.svg" />
+                                </div>
+                            </div>
+                            <div class="col text-center">
+                                <div id="pause" class="button">
+                                    <img class="scrapeicon" src="images/pause.svg" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="article-info-manager">
+                        <div class="row">
+                            Start snowballing on the current article set, using the buttons below
+                             <div class="col text-center">
+                                <div id="snowball" class="button">
+                                    <img class="scrapeicon" src="images/play.svg" />
+                                </div>
+                            </div>
+                            <div class="col text-center">
+                                <div id="pauseSnowball" class="button">
+                                    <img class="scrapeicon" src="images/pause.svg" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Projects page -->
+                <div id="projects-page" class="container">
+                    <div class="container">
+                        <div class="row center">
+                            <h3>Project list</h3>
+                        </div>
+                        <div class="row">
+                            <div class="property">Project:</div>
+                            <div class="value cur-project-name"></div>
+                        </div>
+                        <div class="row label">
+                            Projects:
+                        </div>
+                        <div class="container" id="projectList">
+                        </div>
+                    </div>
+                </div>
+                <!-- Add project page -->
+                <div id="new-project-page" class="container">
+                    <div class="container">
+                        <div class="row center">
+                            <h3>Add Project</h3>
+                        </div>
+                        <div class="row">
+                            <label for="pass" class="property">Project name:</label>
+                        </div>
+                        <div class="row">
+                            <input type="text" id="projectNameNew" name="project name" required>
+                        </div>
+                        <div class="row">
+                            <label for="pass" class="property">Search query:</label>
+                        </div>
+                        <div class="row">
+                            <input type="text" id="searchQueryNew" name="search query" required>
+                        </div>
+                        <div class="row">
+                            <div class="button" id="addProject">Add</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Settings page -->
+                <div id="settings-page" class="container">
+                    <div class="container">
+                        <div class="row center">
+                            <h3>Edit Project</h3>
+                        </div>
+                        <div class="row">
+                            <label for="pass" class="property">Project name:</label>
+                        </div>
+                        <div class="row">
+                            <input type="text" id="projectName" name="project name" required>
+                        </div>
+                        <div class="row">
+                            <label for="pass" class="property">Search query:</label>
+                        </div>
+                        <div class="row">
+                            <input type="text" id="searchQuery" name="search query" required>
+                        </div>
+                        <div class="row">
+                            <div class="button" id="editProject">Edit</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/jquery-3.1.1.min.js"></script>
+    <script src="../js/html_helpers.js"></script>
+    <script src="../config.js"></script>
+    <script src="client.js"></script>
+    <script src="edit_project.js"></script>
+    <script src="search_query_parser.js"></script>
+    <script src="add_project.js"></script>
+    <script src="list_project.js"></script>
+    <script src="enums.js"></script>
+    <script src="page_helper.js"></script>
+    <script src="state_manager.js"></script>
+    <script src="popup.js"></script>
+</body>
+
+</html>

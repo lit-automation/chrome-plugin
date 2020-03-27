@@ -1,0 +1,188 @@
+:root {
+--main-text-color:#1B243D;
+--main-bg-color: #767C8B;
+--secondary-bg-color:  rgba(97, 204, 242, 1);
+--light-grey: #D1D3D8;
+--err-color-form: #ffdddd;
+--err-color-msg: red;
+
+--popup-width: 400px;
+--popup-height: 350px;
+--popup-padding: 10px;
+--menu-width: 80px;
+--content-container-width: calc(var(--popup-width) - var(--menu-width) - var(--popup-padding));
+--message-height: 50px;
+}
+
+body{
+    color: var(--main-bg-color)!important;
+}
+
+h3{
+    color: var(--secondary-bg-color)!important;
+}
+
+input{
+    color: var(--main-bg-color)!important;
+}
+
+.label{
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--main-text-color)
+}
+
+.property{
+    width: 110px;
+    /* color: var(--main-bg-color); */
+    font-weight: bold;
+    color: var(--main-text-color)
+
+}
+
+.value{
+    color: var(--main-bg-color);
+}
+
+#scrape-manager{
+    margin-top: 5px;
+}
+
+/* Pages */
+#home-page{
+    display:none;
+}
+
+#messageDisplay{
+    width: var(--popup-width);
+    transform: translate(0px, -100px);
+    display: block;
+
+    text-align: center;
+    padding-top: 13px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 13px;
+    color: white;
+    background-color: var(--secondary-bg-color);
+    position: absolute;
+}
+
+.messageShow{
+    transform: translate(0px, 0px)!important;
+    transition: transform 0.5s;
+}
+
+#settings-page{
+    display:none;
+}
+
+#new-project-page{
+    display:none;
+}
+
+.active-menu-item {
+    background-color: var(--secondary-bg-color);
+}
+
+#projects-page{
+    display:none;
+}
+
+#signinContainer {
+    padding-top: 20px;
+}
+
+.invalid{
+    background-color: var(--err-color-form);
+}
+
+.err-text{
+   color: var(--err-color-msg);
+}
+
+#normal {
+    display: none;
+}
+
+.margintop {
+    margin-top: 20px;
+}
+
+.wrapper {
+    padding-right: var(--popup-padding);
+    width: var(--popup-width);
+    height: var(--popup-height);
+}
+
+.button {
+    color: var(--main-text-color);
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--light-grey);
+    cursor: pointer;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.button:hover{
+    background-color: var(--secondary-bg-color);
+}
+
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#noAccount {
+    margin-top: 25px;
+    margin-right: 7px;
+}
+
+#signIn {
+    margin-top: 20px;
+}
+
+.menu {
+    padding-top: 10px;
+    border-right: 1px solid var(--main-bg-color);
+    float: left;
+    width: var(--menu-width);
+    max-width: var(--menu-width);
+    height: var(--popup-height);
+}
+
+.content-container{
+    float: right;
+    width: var(--content-container-width);
+    height: var(--popup-height);
+    max-height: var(--popup-height);
+    padding: 10px;
+    padding-bottom: 50px;
+    overflow-y: auto;
+}
+
+.menu-item {
+    margin-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.menu-item:hover {
+    background-color: var(--secondary-bg-color);
+    cursor: pointer;
+}
+
+#editProject,#addProject {
+    margin-top: 5px;
+}
+
+.projectNameContainer{
+    padding-top: 6px;
+}
+
+.project-row {
+    margin-top: 5px;
+}

@@ -1,0 +1,50 @@
+{
+  "name": "Lit automation",
+  "description": "Plugin which scrapes articles from specified search engines.",
+  "version": "2.0",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "css/insert.css"
+      ],
+      "js": [
+        "js/jquery-3.1.1.min.js",
+        "js/html_helpers.js",
+        "scraper/google_scholar.js",
+        "scraper/ieee.js",
+        "scraper/springer.js",
+        "scraper/acm.js",
+        "scraper/science_direct.js",
+        "scraper/web_of_science.js",
+        "scraper/string_helpers.js",
+        "scraper/state_manager.js",
+        "scraper/client.js",
+        "scraper/insert.js",
+        "config.js",
+        "scraper/backward_snowball.js"
+
+      ]
+    }
+  ],
+  "background": {
+   
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'; style-src 'self' maxcdn.bootstrapcdn.com ",
+  "browser_action": {
+    "default_title": "Scraper settings",
+    "default_popup": "popup/popup.html"
+  },
+  "icons": {
+    "48": "images/icon-48x48.png"
+  },
+  "web_accessible_resources": [
+  ],
+  "manifest_version": 2
+}
