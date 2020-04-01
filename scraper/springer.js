@@ -15,8 +15,10 @@ function SpringerRetrieveInfoFromPage() {
 
 function SpringerRetrieveInformationFromArticle(elem) {
     let titleURLAndDOI = SpringerGetTitleAndHREF(FirstElementByClassName(elem, "title"))
-
-    let abstract = FirstElementByClassName(elem, "snippet").innerText
+    let abstract = ""
+    if (FirstElementByClassName(elem, "snippet")) {
+        abstract = FirstElementByClassName(elem, "snippet").innerText
+    }
 
     let authors = ""
     let authorsElem = FirstElementByClassName(elem, "authors")
@@ -24,14 +26,19 @@ function SpringerRetrieveInformationFromArticle(elem) {
         authorsElem.innerText.split(",").join(" ; ");
     }
 
-
-    let journal = FirstElementByClassName(elem, "publication-title").innerText
-    let year = -1;
-    let yearTitle = parseInt(FirstElementByClassName(elem, "year").innerText.substring(1, FirstElementByClassName(elem, "year").innerText.length - 1))
-    if (!isNaN(yearTitle)) {
-        year = yearTitle
+    let journal = ""
+    let pubElem = FirstElementByClassName(elem, "publication-title")
+    if (pubElem) {
+        journal = pubElem.innerText
     }
-
+    let year = -1;
+    let yearElem = FirstElementByClassName(elem, "year")
+    if (yearElem) {
+        let yearTitle = parseInt(yearElem.innerText.substring(1, FirstElementByClassName(elem, "year").innerText.length - 1))
+        if (!isNaN(yearTitle)) {
+            year = yearTitle
+        }
+    }
     let counter = GetPlatformCounter()
     IncreasePlatformCounter()
     return {
@@ -48,6 +55,9 @@ function SpringerRetrieveInformationFromArticle(elem) {
 }
 
 function SpringerGetTitleAndHREF(elem) {
+    if (!elem) {
+        return {}
+    }
     let titleElem = elem
     let doi = ""
     let splittedLink = titleElem.href.split("/")

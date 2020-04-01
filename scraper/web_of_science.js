@@ -14,6 +14,8 @@ function WebOfScienceHandler() {
                 button.click()
             } else if (curHref.includes("Search.do") || curHref.includes("summary.do")) {
                 resolve(WebOfScienceRetrieveInfoFromPage())
+            } else if (curHref.includes("error/Error")){ 
+                resolve("")
             } else {
                 window.location.href = "https://apps.webofknowledge.com/home.do"
             }
