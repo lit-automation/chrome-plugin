@@ -197,7 +197,7 @@ function addProject(body) {
 
     request.fail(function (jqXHR, textStatus) {
         console.log("Request failed", textStatus)
-        displayMessage("Could not update project")
+        displayMessage("Could not add project")
     });
 }
 

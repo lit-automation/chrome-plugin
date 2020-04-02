@@ -104,6 +104,14 @@ function SetDefaultState() {
     StoreState(defaultState)
 }
 
+function IsStateFinished(state){
+    if (!state.platforms[state.processing_index + 1] && (!state.next_url || state.next_url == '')){
+        return enums.ProjectStatusArticlesGathered
+    }else{
+        return enums.ProjectStatusConductingSearch
+    }
+}
+
 function StoreStateFromInsert(state, increasePlatformCounter) {
     return new Promise((resolve, reject) => {
         let curProject = GetCurrentProject()
@@ -124,18 +132,13 @@ function StoreStateFromInsert(state, increasePlatformCounter) {
                 state.next_url = nextURL
             } else {
                 state.status = Paused;
-                updateProject({
-                    "status": enums.ProjectStatusArticlesGathered,
-                }, state.project_id).then((res) => {
-                    displayMessage("Done scraping")
-                }).catch((e) => {
-                    displayMessage("Unable to finish scraping correctly")
-                })
+                displayMessage("Done scraping")
             }
         }
         curProject.scrape_state = btoa(JSON.stringify(state))
         updateProject({
             "scrape_state": curProject.scrape_state,
+            "status": IsStateFinished(state)
         }, curProject.id).then((res) => {
             resolve(res)
         }).catch((e) => {
