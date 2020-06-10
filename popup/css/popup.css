@@ -6,8 +6,8 @@
 --err-color-form: #ffdddd;
 --err-color-msg: red;
 
---popup-width: 400px;
---popup-height: 350px;
+--popup-width: 500px;
+--popup-height: 400px;
 --popup-padding: 10px;
 --menu-width: 80px;
 --content-container-width: calc(var(--popup-width) - var(--menu-width) - var(--popup-padding));
