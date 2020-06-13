@@ -64,13 +64,12 @@ function SnowBall() {
         }
     }
     state = GetSnowBallState()
-
+    let timeoutDuration = Math.floor(Math.random() * 1000)+1000; 
     if (state.snowball_url != "" && state.counter < 5) {
         setTimeout(() => {
             window.location.href = state.snowball_url
-        }, 500)
+        }, timeoutDuration)
     } else {
-        console.log("UPDATE CITED")
         updateArticle({ "cited_by": btoa(unescape(encodeURIComponent(JSON.stringify(state.cited_by)))) }, state.article_id, state.project_id)
         SetDefaultState()
         chrome.runtime.sendMessage({ event: 'next_snowball' }, response => {
@@ -83,7 +82,7 @@ function SnowBall() {
                 counter++
                 setTimeout(() => {
                     requestStateFromPopup(counter)
-                }, 1000);
+                }, timeoutDuration);
             }
         });
     }

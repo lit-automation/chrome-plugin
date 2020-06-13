@@ -149,7 +149,7 @@ function StoreStateFromInsert(state, increasePlatformCounter) {
 
 function StoreState(state) {
     let curProject = GetCurrentProject()
-    curProject.scrape_state = btoa(JSON.stringify(state))
+    curProject.scrape_state = btoa(unescape(encodeURIComponent(JSON.stringify(state))))
     StoreCurrentProject(curProject)
 }
 
