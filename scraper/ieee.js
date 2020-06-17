@@ -128,31 +128,6 @@ function FindLoadMoreButton(counter, foundButton) {
                 index++
                 resolve(splitted[0]+"&pageNumber="+index)
             }
-            // console.log(testtest)
-            // console.log(testtest.href)
-            // let list = FirstElementByClassName(document, "List-results-items")
-            // let elem = FirstElementByClassName(document, "loadMore-btn")
-            // if (!elem && list) {
-            //     resolve("done")
-            // }
-            // if (elem) {
-            //     elem.click();
-            //     return FindLoadMoreButton(counter, true).then(
-            //         (result) => {
-            //             return resolve(result)
-            //         }
-            //     );
-            // } else {
-            //     if (foundButton) {
-            //         return resolve("done");
-            //     }
-            //     counter++
-            //     return FindLoadMoreButton(counter, false).then(
-            //         (result) => {
-            //             return resolve(result)
-            //         }
-            //     );
-            // }
         }, 1000);
     });
 }
