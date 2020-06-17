@@ -7,7 +7,7 @@ function IEEERetrieveInfoFromPage() {
             (result) => {
                 console.log("All load more buttons clicked", result)
                 GetIEEEArticles()
-                resolve()
+                resolve(result)
             }
         ).catch((e) => {
             console.error("Load more button wasn't found.", e)
@@ -110,22 +110,8 @@ function FindLoadMoreButton(counter, foundButton) {
             return resolve("");
         }
         setTimeout(() => {
-            let list = FirstElementByClassName(document, "List-results-items")
-            let elem = FirstElementByClassName(document, "loadMore-btn")
-            if (!elem && list) {
-                resolve("done")
-            }
-            if (elem) {
-                elem.click();
-                return FindLoadMoreButton(counter, true).then(
-                    (result) => {
-                        return resolve(result)
-                    }
-                );
-            } else {
-                if (foundButton) {
-                    return resolve("done");
-                }
+            let testtest = FirstElementByClassName(document,"next-btn")
+            if(!testtest){
                 counter++
                 return FindLoadMoreButton(counter, false).then(
                     (result) => {
@@ -133,6 +119,40 @@ function FindLoadMoreButton(counter, foundButton) {
                     }
                 );
             }
+            let curURL = window.location.href
+            if(!curURL.includes("pageNumber")){
+                resolve(window.location.href+ "&pageNumber=2")
+            }else{
+                let splitted = window.location.href.split("&pageNumber=")
+                let index = parseInt(splitted[1])
+                index++
+                resolve(splitted[0]+"&pageNumber="+index)
+            }
+            // console.log(testtest)
+            // console.log(testtest.href)
+            // let list = FirstElementByClassName(document, "List-results-items")
+            // let elem = FirstElementByClassName(document, "loadMore-btn")
+            // if (!elem && list) {
+            //     resolve("done")
+            // }
+            // if (elem) {
+            //     elem.click();
+            //     return FindLoadMoreButton(counter, true).then(
+            //         (result) => {
+            //             return resolve(result)
+            //         }
+            //     );
+            // } else {
+            //     if (foundButton) {
+            //         return resolve("done");
+            //     }
+            //     counter++
+            //     return FindLoadMoreButton(counter, false).then(
+            //         (result) => {
+            //             return resolve(result)
+            //         }
+            //     );
+            // }
         }, 1000);
     });
 }

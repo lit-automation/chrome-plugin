@@ -99,7 +99,7 @@ function CheckStateForScraping() {
             case PlatformIEEE:
                 IEEERetrieveInfoFromPage().then((result) => {
                     console.log("DONE WITH IEEE", result)
-                    handleNextURL(nextURL)
+                    handleNextURL(result)
                 }).catch((e) => {
                     console.log("TODO handle error", e)
                 })
