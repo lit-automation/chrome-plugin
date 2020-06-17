@@ -6,7 +6,7 @@
 --err-color-form: #ffdddd;
 --err-color-msg: red;
 
---popup-width: 500px;
+--popup-width: 600px;
 --popup-height: 400px;
 --popup-padding: 10px;
 --menu-width: 80px;
@@ -33,7 +33,7 @@ input{
 }
 
 .property{
-    width: 110px;
+     min-width: 110px; 
     /* color: var(--main-bg-color); */
     font-weight: bold;
     color: var(--main-text-color)
@@ -42,6 +42,10 @@ input{
 
 .value{
     color: var(--main-bg-color);
+}
+
+.queryInput{
+    min-width: 400px;
 }
 
 #scrape-manager{
@@ -145,7 +149,7 @@ input{
     margin-top: 20px;
 }
 
-.menu {
+#menuProps {
     padding-top: 10px;
     border-right: 1px solid var(--main-bg-color);
     float: left;
@@ -153,6 +157,8 @@ input{
     max-width: var(--menu-width);
     height: var(--popup-height);
 }
+
+
 
 .content-container{
     float: right;

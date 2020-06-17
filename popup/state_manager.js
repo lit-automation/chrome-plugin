@@ -80,6 +80,7 @@ const PlatformScienceDirect = 6;
 let defaultState = {
     "status": Paused,
     "platforms": [PlatformWebOfScience, PlatformScienceDirect, PlatformSpringer, PlatformScholar, PlatformIEEE, PlatformACM],
+    "urls": [],
     "processing_index": 0,
     "platform_counter": 0,
     "next_url": "",
@@ -123,13 +124,19 @@ function StoreStateFromInsert(state, increasePlatformCounter) {
             if (state.platforms[state.processing_index + 1]) {
                 state.processing_index++
                 state.platform_counter = 0;
-                let parsingResult = parseSearchQuery(curProject.search_string);
-                if (parsingResult.error) {
-                    displayMessage(parsingResult.error)
-                    reject()
+                let isSet = false
+                for (let i = state.processing_index; i < state.urls.length; i++) {
+                    if (state.urls[i] != "") {
+                        state.next_url = state.urls[i]
+                        state.processing_index = i
+                        isSet = true
+                        break
+                    }
                 }
-                let nextURL = createPlatformQueries(parsingResult.tree, true, state.platforms[state.processing_index])
-                state.next_url = nextURL
+                if(!isSet){
+                    state.status = Paused;
+                    displayMessage("Done scraping")
+                }
             } else {
                 state.status = Paused;
                 displayMessage("Done scraping")

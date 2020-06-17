@@ -36,7 +36,7 @@ function parseSearchQuery(input) {
         }
     }
     let arrangedIndexes = arrangeIndexes(indexes)
-    if (arrangedIndexes[0].start == 0 && arrangedIndexes[0].end == input.length-1){
+    if (arrangedIndexes.length>0 && arrangedIndexes[0].start == 0 && arrangedIndexes[0].end == input.length-1){
         return {
             'error': 'Please dont add brackets surrounding the query'
         }
