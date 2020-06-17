@@ -9,8 +9,22 @@ function editProject() {
         return;
     }
     let projectScrapingState = JSON.parse(atob(curProject.scrape_state))
-    let nextURL = createPlatformQueries(parsingResult.tree, true, projectScrapingState.platforms[projectScrapingState.processing_index])
-    projectScrapingState.next_url = nextURL
+    // let nextURL = createPlatformQueries(parsingResult.tree, true, projectScrapingState.platforms[projectScrapingState.processing_index])
+    // projectScrapingState.next_url = nextURL
+    projectScrapingState.urls = []
+    projectScrapingState.urls.push(ByID(document, "queryWebOfScience").value)
+    projectScrapingState.urls.push(ByID(document, "queryScienceDirect").value)
+    projectScrapingState.urls.push(ByID(document, "querySpringer").value)
+    projectScrapingState.urls.push(ByID(document, "queryScholar").value)
+    projectScrapingState.urls.push(ByID(document, "queryIEEE").value)
+    projectScrapingState.urls.push(ByID(document, "queryACM").value)
+    for (let i = projectScrapingState.processing_index; i < projectScrapingState.urls.length; i++) {
+        if (projectScrapingState.urls[i] != "") {
+            projectScrapingState.next_url = projectScrapingState.urls[i]
+            projectScrapingState.processing_index = i
+            break
+        }
+    }
     updateProject({
         "name": projectNameField.value,
         "search_string": searchQueryField.value,

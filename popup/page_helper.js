@@ -69,6 +69,14 @@ function setCurProject() {
     projectNameField.value = curProject.name
     let searchQueryField = ByID(document, "searchQuery")
     searchQueryField.value = curProject.search_string
+    let projectScrapingState = JSON.parse(atob(curProject.scrape_state))
+    document.getElementById('queryWebOfScience').value = projectScrapingState.urls[0]
+    document.getElementById('queryACM').value = projectScrapingState.urls[5]
+    document.getElementById('querySpringer').value = projectScrapingState.urls[2]
+    document.getElementById('queryIEEE').value = projectScrapingState.urls[4]
+    document.getElementById('queryScholar').value = projectScrapingState.urls[3]
+    document.getElementById('queryScienceDirect').value = projectScrapingState.urls[1]
+
     let projectDisplayContainers = ByClassName(document, "cur-project-name")
     for (let i = 0; i < projectDisplayContainers.length; i++) {
         projectDisplayContainers[i].innerHTML = curProject.name

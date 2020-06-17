@@ -50,6 +50,27 @@ document.getElementById('pauseSnowball').addEventListener('click', () => {
 
 });
 
+
+document.getElementById('searchQuery').addEventListener('keyup', function (e) {
+    let elem = document.getElementById('searchQuery')
+    let parsingResult = parseSearchQuery(elem.value);
+    if (parsingResult.error) {
+        return;
+    }
+    let nextURL = createPlatformQueries(parsingResult.tree, true, PlatformWebOfScience)
+    document.getElementById('queryWebOfScience').value = nextURL
+    nextURL = createPlatformQueries(parsingResult.tree, true, PlatformACM)
+    document.getElementById('queryACM').value = nextURL
+    nextURL = createPlatformQueries(parsingResult.tree, true, PlatformSpringer)
+    document.getElementById('querySpringer').value = nextURL
+    nextURL = createPlatformQueries(parsingResult.tree, true, PlatformIEEE)
+    document.getElementById('queryIEEE').value = nextURL
+    nextURL = createPlatformQueries(parsingResult.tree, true, PlatformScholar)
+    document.getElementById('queryScholar').value = nextURL
+    nextURL = createPlatformQueries(parsingResult.tree, true, PlatformScienceDirect)
+    document.getElementById('queryScienceDirect').value = nextURL
+});
+
 document.getElementById('searchQueryNew').addEventListener('keyup', function (e) {
     let elem = document.getElementById('searchQueryNew')
     let parsingResult = parseSearchQuery(elem.value);
