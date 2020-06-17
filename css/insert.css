@@ -7,7 +7,7 @@
     position: absolute!important;
     width: 100vw;
     height: 50px;
-    transform: translate(0px, -300px);
+    transform: translate(0px, -2000px);
     transition: transform 0.75s;
     text-align: center;
 }
