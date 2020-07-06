@@ -9,8 +9,6 @@ function editProject() {
         return;
     }
     let projectScrapingState = JSON.parse(atob(curProject.scrape_state))
-    // let nextURL = createPlatformQueries(parsingResult.tree, true, projectScrapingState.platforms[projectScrapingState.processing_index])
-    // projectScrapingState.next_url = nextURL
     projectScrapingState.urls = []
     projectScrapingState.urls.push(ByID(document, "queryWebOfScience").value)
     projectScrapingState.urls.push(ByID(document, "queryScienceDirect").value)

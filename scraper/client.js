@@ -3,7 +3,6 @@ function createArticle(payload) {
     let bearer = GetJWT()
 
     let projectID = GetProjectID()
-
     let headersIn = {
         'accept': 'application/json',
         'Authorization': bearer

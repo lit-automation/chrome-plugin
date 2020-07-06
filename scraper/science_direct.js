@@ -5,7 +5,7 @@ function ScienceDirectRetrieveInfoFromPage() {
         for (let i = 0; i < articles.length; i++) {
             promises.push(ScienceDirectRetrieveInformationFromArticle(articles[i]))
         }
-
+        
         let nextURLElem = FirstElementByClassName(document, "next-link")
         let nextURL = ""
         if (nextURLElem) {

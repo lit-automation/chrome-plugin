@@ -115,9 +115,8 @@ function IsStateFinished(state){
 
 function StoreStateFromInsert(state, increasePlatformCounter) {
     return new Promise((resolve, reject) => {
-        let curProject = GetCurrentProject()
-        let currentState = btoa(JSON.stringify(curProject.scrape_state))
-        if (currentState.status == Paused) {
+        let stateFromLocal = GetState()
+        if (stateFromLocal.status == Paused) {
             state.status = Paused;
         }
         if (increasePlatformCounter || !state.next_url) {
@@ -142,9 +141,19 @@ function StoreStateFromInsert(state, increasePlatformCounter) {
                 displayMessage("Done scraping")
             }
         }
-        curProject.scrape_state = btoa(JSON.stringify(state))
+
+        
+
+        let curProject = GetCurrentProject()
+        // let temp = btoa(JSON.stringify(curProject2.scrape_state))
+        // if (temp.status == Paused) {
+        //     state.status = Paused;
+        // }
+
+        // curProject.scrape_state = btoa(JSON.stringify(state))
+
         updateProject({
-            "scrape_state": curProject.scrape_state,
+            "scrape_state": btoa(JSON.stringify(state)),
             "status": IsStateFinished(state)
         }, curProject.id).then((res) => {
             resolve(res)
@@ -198,6 +207,9 @@ function StartSnowballState() {
 function StartState() {
     return new Promise((resolve, reject) => {
         let state = GetState()
+        if(state.status === Active){
+            // reject()
+        }
         state.status = Active
         StoreState(state)
         updateProject({

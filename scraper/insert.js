@@ -1,15 +1,14 @@
+let isPolling = false
+
 $(document).ready(() => {
     // Append message display element to the body of the current page
     var objRef = document.body;
     var messageContainer = document.createElement("div");
     messageContainer.id = "messageContainer"
     objRef.prepend(messageContainer)
-
     let state = GetState()
     // If last saved state was active we should ask the current state from the popup
-    if (state.status != Paused) {
         requestStateFromPopup(0);
-    }
 });
 
 function displayMessage(message) {
@@ -30,9 +29,6 @@ function requestStateFromPopup(counter) {
         if (response) {
             receiveStateFromPopup(response)
         } else if (chrome.runtime.lastError) {
-            if (counter == 3) {
-                displayMessage("Please keep the popup window open while gathering articles")
-            }
             counter++
             setTimeout(() => {
                 requestStateFromPopup(counter)
@@ -70,13 +66,13 @@ function receiveStateFromPopup(response) {
         console.warn("Expected state")
         return
     }
+    let state = GetState()
     StoreJWT(response.jwt)
     StoreState(response.state)
-    CheckStateForScraping()
+    CheckStateForScraping(response.state)
 }
 
-function CheckStateForScraping() {
-    let state = GetState()
+function CheckStateForScraping(state) {
     if (state.status == Active) {
         if (!state.next_url) {
             return;
@@ -87,6 +83,12 @@ function CheckStateForScraping() {
                 return
             }
         }
+        if(isPolling && GetCurrentPlatform() != PlatformWebOfScience){
+            console.log("Already polling")
+            return
+        }
+        isPolling = true
+
         let nextURL = ""
         switch (GetCurrentPlatform()) {
             case PlatformScholar:
@@ -165,6 +167,10 @@ function GoToNextURL() {
 // In case contacted retrieve state from popup
 chrome.runtime.onMessage.addListener(
     (request, sender, sendResponse) => {
+        // let state = GetState()
+        // if (state.status == Active && request.click == "play") {
+        //     return
+        // }
         requestStateFromPopup(0);
         sendResponse("active")
     });

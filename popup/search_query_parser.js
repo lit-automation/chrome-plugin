@@ -85,7 +85,7 @@ function createPlatformQueries(node, isRoot, platform) {
             return 'https://link.springer.com/search?query=' + encodeURI(query)
         case PlatformScienceDirect:
             query = createPlatformQuery(node, isRoot, "", "", "(", ")")
-            return 'https://www.sciencedirect.com/search/advanced?qs=' + encodeURI(query)
+            return 'https://www.sciencedirect.com/search?qs=' + encodeURI(query)
         case PlatformWebOfScience:
             query = createPlatformQuery(node, isRoot, "", "", "(", ")")
             return query

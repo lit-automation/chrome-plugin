@@ -2,13 +2,17 @@
 
 document.getElementById('play').addEventListener('click', () => {
     let state = GetState()
+    if(state.status === Active){
+        displayMessage("Scraping already started")
+        return
+    }
     let curProject = GetCurrentProject()
     if(IsStateFinished(state) == enums.ProjectStatusArticlesGathered){
         updateProject({
             "status": enums.ProjectStatusArticlesGathered
         }, curProject.id)
         return
-    }
+    }         
     StartState().then(() => {
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             chrome.tabs.sendMessage(tabs[0].id, { click: "play" }, response => {
@@ -24,6 +28,7 @@ document.getElementById('play').addEventListener('click', () => {
 });
 
 document.getElementById('pause').addEventListener('click', () => {
+    displayMessage("Paused scraping")
     PauseState()
 });
 
@@ -46,6 +51,7 @@ document.getElementById('snowball').addEventListener('click', () => {
 });
 
 document.getElementById('pauseSnowball').addEventListener('click', () => {
+    displayMessage("Paused snowballing")
     PauseState()
 
 });
